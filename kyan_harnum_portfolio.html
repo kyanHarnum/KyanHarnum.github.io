@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kyan Harnum — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --accent: #00e5c0;
+    --accent2: #ff6b35;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --card: #14141f;
+    --border: rgba(0,229,192,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(0,229,192,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.2s;
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(80px, 14vw, 180px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+
+  .hero-name span {
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.5vw, 28px);
+    color: var(--muted);
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.6s;
+  }
+
+  .hero-contact {
+    display: flex;
+    gap: 32px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.8s;
+  }
+
+  .contact-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-item:hover { color: var(--accent); }
+  .contact-item svg { width: 14px; height: 14px; }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 1.2s;
+  }
+  .scroll-hint::after {
+    content: '';
+    width: 1000px;
+    height: 1px;
+    background: var(--accent);
+    animation: expandLine 0.8s ease forwards 1.5s;
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 100px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1;
+    margin-bottom: 60px;
+  }
+
+  /* STATEMENT */
+  .statement-text {
+    font-size: clamp(16px, 1.8vw, 20px);
+    line-height: 1.8;
+    color: rgba(232,232,240,0.75);
+    max-width: 800px;
+    border-left: 2px solid var(--accent);
+    padding-left: 32px;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .skill-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--accent);
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-chip:hover {
+    background: rgba(0,229,192,0.1);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* EXPERIENCE */
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .exp-item {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-left: 3px solid transparent;
+    padding: 32px 36px;
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,229,192,0.03) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .exp-item:hover {
+    border-left-color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  .exp-item:hover::before { opacity: 1; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .exp-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--text);
+  }
+
+  .exp-company {
+    color: var(--accent);
+  }
+
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    padding-top: 4px;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    color: rgba(232,232,240,0.65);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent2);
+    font-size: 0.8rem;
+  }
+
+  /* EDUCATION */
+  .edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+
+  @media (max-width: 700px) {
+    .edu-grid { grid-template-columns: 1fr; }
+    section { padding: 80px 24px; }
+    .hero { padding: 80px 24px 60px; }
+    .scroll-hint { left: 24px; }
+  }
+
+  .edu-card {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .edu-card:hover {
+    border-color: rgba(0,229,192,0.2);
+  }
+
+  .edu-card::after {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(0,229,192,0.08) 0%, transparent 70%);
+  }
+
+  .edu-school {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+
+  .edu-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .edu-detail {
+    font-size: 0.85rem;
+    color: rgba(232,232,240,0.6);
+    margin-bottom: 4px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 60px;
+    max-width: calc(1200px - 120px);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 60px;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.2em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes expandLine {
+    to { transform: scaleX(1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Computer Science · Junior · SVSU</div>
+  <h1 class="hero-name">Kyan<br><span>Harnum</span></h1>
+  <p class="hero-sub">Developer · Athlete · Problem Solver</p>
+  <div class="hero-contact">
+    <a class="contact-item" href="tel:9073886645">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      907-388-6645
+    </a>
+    <a class="contact-item" href="mailto:kyan79@icloud.com">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      kyan79@icloud.com
+    </a>
+    <span class="contact-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Fairbanks, AK
+    </span>
+    <a class="contact-item" href="www.linkedin.com/in/kyan-harnum" target="_blank" rel="noopener noreferrer">
+      <svg fill="currentColor" stroke="none" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      Kyan Harnum
+    </a>
+    <a class="contact-item" href="https://github.com/kyanHarnum" target="_blank" rel="noopener noreferrer">
+      <svg fill="currentColor" stroke="none" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
+      KyanHarnum
+      </a>
+  </div>
+  <div class="scroll-hint"></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- PERSONAL STATEMENT -->
+<section class="reveal">
+  <div class="section-label">About</div>
+  <h2 class="section-title">Personal<br>Statement</h2>
+  <p class="statement-text">
+    Born and raised in Fairbanks, Alaska, I'm currently completing my sophomore year at Saginaw Valley State University in Michigan, majoring in Computer Science with a minor in Cyber Security. I'm a full-time student and collegiate swimmer — my daily 3–4 hour swim practice has built the mental analysis, time management, adaptation, and persistence I bring to every challenge. Whether refining my stroke or mastering new languages like Java, Python, and C++, I'm always pushing my limits. I'm outgoing, open-minded, and committed to a healthy balance of hard work and self-care.
+  </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="reveal">
+  <div class="section-label">Technical</div>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-chip">Python</div>
+    <div class="skill-chip">Java</div>
+    <div class="skill-chip">C++</div>
+    <div class="skill-chip">AWS</div>
+    <div class="skill-chip">HTML5</div>
+    <div class="skill-chip">PHP</div>
+    <div class="skill-chip">SQL</div>
+    <div class="skill-chip">LAMP Stack</div>
+    <div class="skill-chip">DuckDB</div>
+    <div class="skill-chip">Apache Parquet</div>
+    <div class="skill-chip">Cyber Security</div>
+    <div class="skill-chip">BLS Certified</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section class="reveal">
+  <div class="section-label">Experience</div>
+  <h2 class="section-title">Work &<br>Internships</h2>
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">STAC Developer</div>
+          <div class="exp-company">University of Alaska Fairbanks</div>
+        </div>
+        <div class="exp-date">05/2025 — 08/2025</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Developed data pipelines and tooling using Python in a research computing environment.</li>
+        <li>Built and deployed web infrastructure on a LAMP stack (Linux, Apache, MySQL, PHP).</li>
+        <li>Leveraged AWS cloud services for storage, compute, and deployment workflows.</li>
+        <li>Worked with Apache Parquet file formats for efficient columnar data storage and retrieval.</li>
+        <li>Utilized DuckDB for fast, in-process analytical querying of large datasets.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Lifeguard</div>
+          <div class="exp-company">FNSB, Hamme Pool</div>
+        </div>
+        <div class="exp-date">10/2022 — 07/2023</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Monitored pools and responded to emergency situations; BLS Certified.</li>
+        <li>Enforced safety policies and rules to prevent accidents and injuries.</li>
+        <li>Assisted and taught swim lessons and activities to children.</li>
+        <li>Developed working relationships with fellow employees and the general public.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">Soccer Referee</div>
+          <div class="exp-company">FYSA Soccer Fields</div>
+        </div>
+        <div class="exp-date">10/2019 — Present</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Officiated soccer games across multiple age divisions and skill levels.</li>
+        <li>Communicated with coaches and officials to coordinate game activities.</li>
+        <li>Taught rules and regulations to players of different age groups.</li>
+        <li>Maintained safe and fair game environments through clear decision-making.</li>
+      </ul>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-header">
+        <div>
+          <div class="exp-role">IT Intern</div>
+          <div class="exp-company">Fairbanks Memorial Hospital</div>
+        </div>
+        <div class="exp-date">06/2021 — 07/2021</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Troubleshot and resolved hardware and software issues for hospital staff.</li>
+        <li>Participated in group projects requiring intensive technical knowledge.</li>
+        <li>Collaborated with co-workers to improve system reliability and uptime.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section class="reveal">
+  <div class="section-label">Education</div>
+  <h2 class="section-title">Academic<br>Background</h2>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-school">Saginaw Valley State University</div>
+      <div class="edu-period">Aug 2023 — Present</div>
+      <div class="edu-detail">B.S. Computer Science</div>
+      <div class="edu-detail">Minor in Cyber Security</div>
+      <div class="edu-detail" style="margin-top:12px; color: var(--accent); font-size:0.78rem;">Collegiate Swimmer</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-school">West Valley High School</div>
+      <div class="edu-period">Aug 2019 — May 2023 · Graduate</div>
+      <div class="edu-detail">3.9 Cumulative GPA</div>
+      <div class="edu-detail">Honor Roll — Freshman through Senior Year</div>
+      <div class="edu-detail">Swim Team Captain · Varsity Soccer · eSports · Band</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Kyan Harnum &nbsp;·&nbsp; Fairbanks, AK &nbsp;·&nbsp; kyan79@icloud.com
+</footer>
+
+<script>
+  // Intersection Observer for scroll reveals
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
