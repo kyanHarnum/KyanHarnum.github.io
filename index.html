@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kyan Harnum — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 <style>
   :root {
     --bg: #0a0a0f;
-    --bg2: #111118;
     --accent: #00e5c0;
     --accent2: #ff6b35;
     --text: #e8e8f0;
@@ -18,19 +18,17 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', 'Segoe UI', Helvetica, Arial, sans-serif;
     font-weight: 300;
     line-height: 1.6;
     overflow-x: hidden;
   }
 
-  /* NOISE OVERLAY */
   body::before {
     content: '';
     position: fixed;
@@ -41,7 +39,6 @@
     opacity: 0.5;
   }
 
-  /* HERO */
   .hero {
     min-height: 100vh;
     display: flex;
@@ -55,47 +52,40 @@
   .hero::after {
     content: '';
     position: absolute;
-    top: -200px;
-    right: -200px;
-    width: 700px;
-    height: 700px;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
     background: radial-gradient(circle, rgba(0,229,192,0.08) 0%, transparent 70%);
     pointer-events: none;
   }
 
   .hero-tag {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.75rem;
     letter-spacing: 0.3em;
     color: var(--accent);
     text-transform: uppercase;
     margin-bottom: 24px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.2s;
+    animation: fadeUp 0.6s ease both 0.2s;
   }
 
   .hero-name {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
     font-size: clamp(80px, 14vw, 180px);
     line-height: 0.9;
     letter-spacing: -0.02em;
     color: var(--text);
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.4s;
+    animation: fadeUp 0.7s ease both 0.4s;
   }
 
-  .hero-name span {
-    color: var(--accent);
-  }
+  .hero-name span { color: var(--accent); }
 
   .hero-sub {
-    font-family: 'DM Serif Display', serif;
+    font-family: 'DM Serif Display', Georgia, 'Times New Roman', serif;
     font-style: italic;
     font-size: clamp(18px, 2.5vw, 28px);
     color: var(--muted);
     margin-top: 20px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.6s;
+    animation: fadeUp 0.7s ease both 0.6s;
   }
 
   .hero-contact {
@@ -103,12 +93,11 @@
     gap: 32px;
     margin-top: 48px;
     flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.8s;
+    animation: fadeUp 0.7s ease both 0.8s;
   }
 
   .contact-item {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.8rem;
     color: var(--muted);
     display: flex;
@@ -118,33 +107,29 @@
     transition: color 0.2s;
   }
   .contact-item:hover { color: var(--accent); }
-  .contact-item svg { width: 14px; height: 14px; }
+  .contact-item svg { width: 14px; height: 14px; flex-shrink: 0; }
 
   .scroll-hint {
     position: absolute;
-    bottom: 40px;
-    left: 60px;
-    font-family: 'DM Mono', monospace;
+    bottom: 40px; left: 60px;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.2em;
     color: var(--muted);
     display: flex;
     align-items: center;
     gap: 12px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 1.2s;
+    animation: fadeUp 0.7s ease both 1.2s;
   }
   .scroll-hint::after {
     content: '';
-    width: 40px;
-    height: 1px;
+    width: 1000px; height: 1px;
     background: var(--accent);
     animation: expandLine 0.8s ease forwards 1.5s;
     transform-origin: left;
     transform: scaleX(0);
   }
 
-  /* SECTIONS */
   section {
     padding: 100px 60px;
     max-width: 1200px;
@@ -152,7 +137,7 @@
   }
 
   .section-label {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.7rem;
     letter-spacing: 0.4em;
     color: var(--accent);
@@ -161,13 +146,12 @@
   }
 
   .section-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Bebas Neue', Impact, 'Arial Narrow', sans-serif;
     font-size: clamp(48px, 6vw, 80px);
     line-height: 1;
     margin-bottom: 60px;
   }
 
-  /* STATEMENT */
   .statement-text {
     font-size: clamp(16px, 1.8vw, 20px);
     line-height: 1.8;
@@ -177,15 +161,10 @@
     padding-left: 32px;
   }
 
-  /* SKILLS */
-  .skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
+  .skills-grid { display: flex; flex-wrap: wrap; gap: 12px; }
 
   .skill-chip {
-    font-family: 'DM Mono', monospace;
+    font-family: 'DM Mono', 'Courier New', monospace;
     font-size: 0.78rem;
     padding: 8px 18px;
     border: 1px solid var(--border);
@@ -201,12 +180,7 @@
     transform: translateY(-2px);
   }
 
-  /* EXPERIENCE */
-  .exp-list {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
+  .exp-list { display: flex; flex-direction: column; gap: 4px; }
 
   .exp-item {
     background: var(--card);
@@ -214,87 +188,56 @@
     border-left: 3px solid transparent;
     padding: 32px 36px;
     transition: all 0.3s;
-    cursor: default;
     position: relative;
     overflow: hidden;
   }
-
   .exp-item::before {
     content: '';
-    position: absolute;
-    inset: 0;
+    position: absolute; inset: 0;
     background: linear-gradient(135deg, rgba(0,229,192,0.03) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s;
+    opacity: 0; transition: opacity 0.3s;
   }
-
-  .exp-item:hover {
-    border-left-color: var(--accent);
-    transform: translateX(4px);
-  }
-
+  .exp-item:hover { border-left-color: var(--accent); transform: translateX(4px); }
   .exp-item:hover::before { opacity: 1; }
 
   .exp-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px;
-    flex-wrap: wrap;
+    gap: 20px; flex-wrap: wrap;
     margin-bottom: 8px;
   }
 
   .exp-role {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.3rem;
-    color: var(--text);
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.3rem; color: var(--text);
   }
-
-  .exp-company {
-    color: var(--accent);
-  }
+  .exp-company { color: var(--accent); }
 
   .exp-date {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    white-space: nowrap;
-    padding-top: 4px;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.72rem; color: var(--muted);
+    letter-spacing: 0.1em; white-space: nowrap; padding-top: 4px;
   }
 
   .exp-bullets {
-    list-style: none;
-    margin-top: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+    list-style: none; margin-top: 16px;
+    display: flex; flex-direction: column; gap: 6px;
   }
-
   .exp-bullets li {
     font-size: 0.9rem;
     color: rgba(232,232,240,0.65);
-    padding-left: 20px;
-    position: relative;
+    padding-left: 20px; position: relative;
   }
-
   .exp-bullets li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent2);
-    font-size: 0.8rem;
+    content: '→'; position: absolute; left: 0;
+    color: var(--accent2); font-size: 0.8rem;
   }
 
-  /* PROJECTS */
   .projects-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px;
-  }
-
-  @media (max-width: 700px) {
-    .projects-grid { grid-template-columns: 1fr; }
   }
 
   .project-card {
@@ -302,162 +245,95 @@
     border: 1px solid rgba(255,255,255,0.04);
     border-left: 3px solid var(--accent2);
     padding: 32px 36px;
-    position: relative;
-    overflow: hidden;
+    position: relative; overflow: hidden;
     transition: all 0.3s;
   }
-
   .project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: linear-gradient(135deg, rgba(255,107,53,0.04) 0%, transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s;
+    opacity: 0; transition: opacity 0.3s;
   }
-
   .project-card:hover { border-left-color: var(--accent); transform: translateX(4px); }
   .project-card:hover::before { opacity: 1; }
 
   .project-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.2em;
-    color: var(--accent2);
-    margin-bottom: 14px;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    color: var(--accent2); margin-bottom: 14px;
   }
-
   .project-status::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
     background: var(--accent2);
     animation: pulse 2s ease-in-out infinite;
   }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
   .project-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.25rem;
-    color: var(--text);
-    margin-bottom: 10px;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.25rem; color: var(--text); margin-bottom: 10px;
   }
-
   .project-desc {
     font-size: 0.88rem;
-    color: rgba(232,232,240,0.6);
-    line-height: 1.7;
+    color: rgba(232,232,240,0.6); line-height: 1.7;
   }
-
-  .project-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 18px;
-  }
-
+  .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
   .project-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.68rem;
-    padding: 4px 10px;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.68rem; padding: 4px 10px;
     border: 1px solid rgba(0,229,192,0.2);
-    color: var(--muted);
-    border-radius: 2px;
-    letter-spacing: 0.05em;
+    color: var(--muted); border-radius: 2px; letter-spacing: 0.05em;
   }
 
-  /* EDUCATION */
-  .edu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4px;
-  }
-
-  @media (max-width: 700px) {
-    .edu-grid { grid-template-columns: 1fr; }
-    section { padding: 80px 24px; }
-    .hero { padding: 80px 24px 60px; }
-    .scroll-hint { left: 24px; }
-  }
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
 
   .edu-card {
     background: var(--card);
     border: 1px solid rgba(255,255,255,0.04);
-    padding: 36px;
-    position: relative;
-    overflow: hidden;
+    padding: 36px; position: relative; overflow: hidden;
     transition: all 0.3s;
   }
-
-  .edu-card:hover {
-    border-color: rgba(0,229,192,0.2);
-  }
-
+  .edu-card:hover { border-color: rgba(0,229,192,0.2); }
   .edu-card::after {
-    content: '';
-    position: absolute;
-    bottom: -40px;
-    right: -40px;
-    width: 100px;
-    height: 100px;
+    content: ''; position: absolute;
+    bottom: -40px; right: -40px;
+    width: 100px; height: 100px;
     background: radial-gradient(circle, rgba(0,229,192,0.08) 0%, transparent 70%);
   }
 
   .edu-school {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 4px;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 1.2rem; margin-bottom: 4px;
   }
-
   .edu-period {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.7rem; color: var(--accent);
+    letter-spacing: 0.1em; margin-bottom: 16px;
   }
+  .edu-detail { font-size: 0.85rem; color: rgba(232,232,240,0.6); margin-bottom: 4px; }
 
-  .edu-detail {
-    font-size: 0.85rem;
-    color: rgba(232,232,240,0.6);
-    margin-bottom: 4px;
-  }
-
-  /* DIVIDER */
   .divider {
-    width: 100%;
+    width: calc(100% - 120px);
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--border), transparent);
     margin: 0 60px;
     max-width: calc(1200px - 120px);
   }
 
-  /* FOOTER */
   footer {
     padding: 40px 60px;
     text-align: center;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.2em;
+    font-family: 'DM Mono', 'Courier New', monospace;
+    font-size: 0.7rem; color: var(--muted); letter-spacing: 0.2em;
   }
 
-  /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
-  @keyframes expandLine {
-    to { transform: scaleX(1); }
+  @keyframes expandLine { to { transform: scaleX(1); } }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
   }
 
   .reveal {
@@ -465,16 +341,19 @@
     transform: translateY(30px);
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+  @media (max-width: 700px) {
+    .hero { padding: 80px 24px 60px; }
+    section { padding: 80px 24px; }
+    .divider { margin: 0 24px; width: calc(100% - 48px); }
+    .scroll-hint { left: 24px; }
+    .edu-grid, .projects-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
-<!-- HERO -->
 <div class="hero">
   <div class="hero-tag">Computer Science · Sophomore · SVSU</div>
   <h1 class="hero-name">Kyan<br><span>Harnum</span></h1>
@@ -484,21 +363,21 @@
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
       907-388-6645
     </a>
-    <a class="contact-item" href="/cdn-cgi/l/email-protection#0f64766e6138364f666c63607a6b216c6062">
+    <a class="contact-item" href="mailto:kyan79@icloud.com">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      <span class="__cf_email__" data-cfemail="d1baa8b0bfe6e891b8b2bdbea4b5ffb2bebc">[email&#160;protected]</span>
+      kyan79@icloud.com
     </a>
     <span class="contact-item">
       <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
       Fairbanks, AK
     </span>
-    <a class="contact-item" href="YOUR_LINKEDIN_URL" target="_blank" rel="noopener noreferrer">
+    <a class="contact-item" href="https://www.linkedin.com/in/kyan-harnum" target="_blank" rel="noopener noreferrer">
       <svg fill="currentColor" stroke="none" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-      YOUR_LINKEDIN_NAME
+      Kyan Harnum
     </a>
-    <a class="contact-item" href="https://github.com/YOUR_GITHUB_USERNAME" target="_blank" rel="noopener noreferrer">
+    <a class="contact-item" href="hhttps://github.com/kyanHarnum" target="_blank" rel="noopener noreferrer">
       <svg fill="currentColor" stroke="none" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
-      YOUR_GITHUB_USERNAME
+      KyanHarnum
     </a>
   </div>
   <div class="scroll-hint"></div>
@@ -506,7 +385,6 @@
 
 <div class="divider"></div>
 
-<!-- PERSONAL STATEMENT -->
 <section class="reveal">
   <div class="section-label">About</div>
   <h2 class="section-title">Personal<br>Statement</h2>
@@ -517,7 +395,6 @@
 
 <div class="divider"></div>
 
-<!-- SKILLS -->
 <section class="reveal">
   <div class="section-label">Technical</div>
   <h2 class="section-title">Skills</h2>
@@ -539,10 +416,9 @@
 
 <div class="divider"></div>
 
-<!-- EXPERIENCE -->
 <section class="reveal">
   <div class="section-label">Experience</div>
-  <h2 class="section-title">Work &<br>Internships</h2>
+  <h2 class="section-title">Work &amp;<br>Internships</h2>
   <div class="exp-list">
 
     <div class="exp-item">
@@ -614,7 +490,6 @@
 
 <div class="divider"></div>
 
-<!-- PROJECTS -->
 <section class="reveal">
   <div class="section-label">Projects</div>
   <h2 class="section-title">In Progress</h2>
@@ -649,7 +524,6 @@
 
 <div class="divider"></div>
 
-<!-- EDUCATION -->
 <section class="reveal">
   <div class="section-label">Education</div>
   <h2 class="section-title">Academic<br>Background</h2>
@@ -672,9 +546,25 @@
 </section>
 
 <footer>
-  Kyan Harnum &nbsp;·&nbsp; Fairbanks, AK &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6e05170f0059572e070d02011b0a400d0103">[email&#160;protected]</a>
+  Kyan Harnum &nbsp;·&nbsp; Fairbanks, AK &nbsp;·&nbsp; kyan79@icloud.com
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Intersection Observer for scroll reveals
-  const r
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Safety net: force everything visible after 2s in case animations stall
+  setTimeout(() => {
+    reveals.forEach(el => el.classList.add('visible'));
+  }, 2000);
+</script>
+</body>
+</html>
